@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة مطابقة العدد مع الصورة</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-3-2-style.css') }}">
+</head>
+<body>
+    <div id="game-container">
+        <div class="container">
+            <div class="speech-bubble">
+                <p>قم بسحب الرقم ووضعه على الصورة التي تحتوي على نفس العدد من الحيوانات</p>
+            </div>
+            <div class="images">
+                <div class="image-box" id="ladybug">
+                    <img src="{{ url_for('static', filename='images/ladybugs.png') }}" alt="عدد الخنافس">
+                </div>
+                <div class="image-box" id="owl">
+                    <img src="{{ url_for('static', filename='images/owls.png') }}" alt="عدد البوم">
+                </div>
+                <div class="image-box" id="bird">
+                    <img src="{{ url_for('static', filename='images/bird.png') }}" alt="عدد العصافير">
+                </div>
+                <div class="image-box" id="fox">
+                    <img src="{{ url_for('static', filename='images/foxes.png') }}" alt="عدد الثعالب">
+                </div>
+            </div>
+        </div>
+
+        <div class="numbers">
+            <div class="number-box" draggable="true" id="num-2">
+                <img src="{{ url_for('static', filename='images/num2.png') }}" alt="رقم 2">
+            </div>
+            <div class="number-box" draggable="true" id="num-9">
+                <img src="{{ url_for('static', filename='images/num9.png') }}" alt="رقم 9">
+            </div>
+            <div class="number-box" draggable="true" id="num-5">
+                <img src="{{ url_for('static', filename='images/num5.png') }}" alt="رقم 5">
+            </div>
+            <div class="number-box" draggable="true" id="num-1">
+                <img src="{{ url_for('static', filename='images/num1.png') }}" alt="رقم 1">
+            </div>
+        </div>
+    </div>
+    <script>const GO_M1_3_3 = "{{ url_for('learn_colors') }}";</script>
+    <script src="{{ url_for('static', filename='M1-3-2-script.js') }}"> </script>
+</body>
+</html>

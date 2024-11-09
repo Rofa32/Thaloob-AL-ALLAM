@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة مطابقة الألوان</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-3-4-style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h1>اسحب اللون وضعه على الصوت الصحيح</h1>
+
+        <!-- Container for the sound icons -->
+        <div class="sound-container" id="sound-container">
+            <!-- Sounds will be generated dynamically using JavaScript -->
+        </div>
+
+        <!-- Container for color choices -->
+        <div class="choices-container" id="choices-container">
+            <!-- Color choices will be generated dynamically using JavaScript -->
+        </div>
+
+        <div id="message"></div>
+    </div>
+
+    <!-- Define IMAGE_BASE_PATH and AUDIO_BASE_PATH for use in JavaScript -->
+    <script>
+        const IMAGE_BASE_PATH = "{{ url_for('static', filename='images/') }}";
+        const AUDIO_BASE_PATH = IMAGE_BASE_PATH;
+    
+    </script>
+
+    <!-- Link to external JavaScript file -->
+    <script src="{{ url_for('static', filename='M1-3-4-script.js') }}"></script>
+</body>
+</html>

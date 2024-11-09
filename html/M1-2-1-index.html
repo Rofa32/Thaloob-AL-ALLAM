@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المرحلة الأولى: اختر الكلمة الصحيحة</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-2-1-style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h1>اختر الكلمة الصحيحة</h1>
+        <div class="sound-container">
+            <img src="{{ url_for('static', filename='images/audiologo-removebg-preview.png') }}" 
+                 id="play-sound" 
+                 alt="تشغيل الصوت" 
+                 class="sound-icon">
+        </div>
+        <div class="choices" id="choices-container">
+            <button class="choice" data-answer="correct">سَمَك</button>
+            <button class="choice" data-answer="wrong">سَلَطَة</button>
+            <button class="choice" data-answer="wrong">سُكَّر</button>
+        </div>
+        <div id="message"></div>
+    </div>
+    <script>
+        const audioFiles = {
+            "samak": "{{ url_for('static', filename='images/سمك.mp3') }}",
+            "jubn": "{{ url_for('static', filename='images/جبن.mp3') }}",
+            "zeeb": "{{ url_for('static', filename='images/zeeb.mp3') }}",
+            "shams": "{{ url_for('static', filename='images/شمس.mp3') }}",
+            "hisan": "{{ url_for('static', filename='images/حصان.mp3') }}"
+        };
+    </script>
+    <script src="{{ url_for('static', filename='M1-2-1-script.js') }}"></script>
+</body>
+</html>

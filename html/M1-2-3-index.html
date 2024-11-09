@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة مطابقة الكلمة مع الصورة</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-2-3-style.css') }}">
+</head>
+<body>
+    <div id="game-container">
+        <p id="instruction">قم بسحب الكلمة إلى الصورة المناسبة</p>
+
+        <!-- المرحلة الأولى: مطابقة الضفدع والنملة -->
+        <div id="phase-1">
+            <div class="container">
+                <div class="images">
+                    <div class="image-box" id="frog">
+                        <img src="https://img.icons8.com/color/96/000000/frog.png" alt="ضفدع">
+                    </div>
+                    <div class="image-box" id="ant">
+                        <img src="https://img.icons8.com/color/96/000000/ant.png" alt="نملة">
+                    </div>
+                </div>
+                <div class="words">
+                    <div class="word-box" draggable="true" id="word-ant">نَمْلَةٌ</div>
+                    <div class="word-box" draggable="true" id="word-frog">ضِفْدَعٌ</div>
+                    <div class="word-box" draggable="true" id="word-crow">غُرَابٌ</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المرحلة الثانية: مطابقة الكتاب، اليقطين، التفاح -->
+        <div id="phase-2" style="display: none;">
+            <div class="container">
+                <div class="images">
+                    <div class="image-box" id="book">
+                        <img src="https://img.icons8.com/color/96/000000/book.png" alt="كتاب">
+                    </div>
+                    <div class="image-box" id="pumpkin">
+                        <img src="https://img.icons8.com/color/96/000000/pumpkin.png" alt="يقطين">
+                    </div>
+                    <div class="image-box" id="apple">
+                        <img src="https://img.icons8.com/color/96/000000/apple.png" alt="تفاح">
+                    </div>
+                </div>
+                <div class="words">
+                    <div class="word-box" draggable="true" id="word-book">كِتَـابٌ</div>
+                    <div class="word-box" draggable="true" id="word-pumpkin">يَقْطِينٌ</div>
+                    <div class="word-box" draggable="true" id="word-apple">تُفَاحٌ</div>
+                    <div class="word-box" draggable="true" id="word-extra">بَطِّيخٌ</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المرحلة الثالثة: مطابقة الشجرة، النخلة، الزيتون، الذرة -->
+        <div id="phase-3" style="display: none;">
+            <div class="container">
+                <div class="images">
+                    <div class="image-box" id="tree">
+                        <img src="{{ url_for('static', filename='images/tree.png') }}" alt="شجرة">
+                    </div>
+                    <div class="image-box" id="palm">
+                        <img src="https://img.icons8.com/color/96/000000/palm-tree.png" alt="نخلة">
+                    </div>
+                    <div class="image-box" id="olive">
+                        <img src="https://img.icons8.com/color/96/000000/olive.png" alt="زيتون">
+                    </div>
+                    <div class="image-box" id="corn">
+                        <img src="https://img.icons8.com/color/96/000000/corn.png" alt="ذرة">
+                    </div>
+                </div>
+                <div class="words">
+                    <div class="word-box" draggable="true" id="word-tree">شَـجَـرَةٌ</div>
+                    <div class="word-box" draggable="true" id="word-palm">نَـخْـلَـةٌ</div>
+                    <div class="word-box" draggable="true" id="word-olive">زَيْـتُونٌ</div>
+                    <div class="word-box" draggable="true" id="word-corn">ذُرَةٌ</div>
+                    <div class="word-box" draggable="true" id="word-extra-2">بَطَاطِسٌ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='M1-2-3-script.js') }}"></script>
+</body>
+</html>

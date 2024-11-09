@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة مطابقة الصوت</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-2-2-style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h1>اسحب الحرف أو الكلمة و ضعها على الصوت الصحيح</h1>
+        <div class="sound-container" id="sound-container"></div>
+        <div class="choices-container" id="choices-container"></div>
+        <div id="message"></div>
+    </div>
+    <script>
+        const audioFiles = {
+            "b": "{{ url_for('static', filename='images/ب.mp3') }}",
+            "t": "{{ url_for('static', filename='images/ت.mp3') }}",
+            "th": "{{ url_for('static', filename='images/ث.mp3') }}",
+            "j": "{{ url_for('static', filename='images/ج.mp3') }}",
+            "dubb": "{{ url_for('static', filename='images/دب.mp3') }}",
+            "deek": "{{ url_for('static', filename='images/ديك.mp3') }}",
+            "delfeen": "{{ url_for('static', filename='images/دلفين.mp3') }}",
+            "roman": "{{ url_for('static', filename='images/رمان.mp3') }}"
+        };
+        const audioIconURL= '{{ url_for("static", filename="images/audiologo-removebg-preview.png") }}';
+    </script>
+    <script src="{{ url_for('static', filename='M1-2-2-script.js') }}"></script>
+</body>
+</html>

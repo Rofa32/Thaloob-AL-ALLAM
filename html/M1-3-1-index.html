@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Arabic Numbers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-3-1-style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="background">
+            <img id="background-image" src="{{ url_for('static', filename='images/M1.png') }}" alt="Background">
+        </div>
+        <div class="frame">
+            <img id="left-arrow" src="{{ url_for('static', filename='images/right.png') }}" alt="Left Arrow" class="arrow" onclick="navigateNumber('prev')">
+            <img id="right-arrow" src="{{ url_for('static', filename='images/left.png') }}" alt="Right Arrow" class="arrow" onclick="navigateNumber('next')">
+
+            <div class="content-row">
+                <div id="hand-images" class="hand-images-container"></div>
+                <img id="number-image" alt="Number Image" class="number-image">
+            </div>
+
+            <div class="interactive-buttons">
+                <img id="pen-logo" src="{{ url_for('static', filename='images/penlogo-removebg-preview.png') }}" alt="Pen Icon" class="icon">
+            </div>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>حاول كتابة الرقم</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="audio-container"></div>
+
+    <script>
+        const IMAGE_BASE_PATH = "{{ url_for('static', filename='images/') }}";
+        const AUDIO_BASE_PATH = IMAGE_BASE_PATH;
+        const GO_M1_3_2 = "{{ url_for('game_numbers') }}";
+        const numbersData = [
+            { number: { image: `${IMAGE_BASE_PATH}Num-1.png`, sound: `${AUDIO_BASE_PATH}audio1.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-1.png`], write_image: `${IMAGE_BASE_PATH}sketch1.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-2.png`, sound: `${AUDIO_BASE_PATH}audio2.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-2.png`], write_image: `${IMAGE_BASE_PATH}sketch2.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-3.png`, sound: `${AUDIO_BASE_PATH}audio3.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-3.png`], write_image: `${IMAGE_BASE_PATH}sketch3.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-4.png`, sound: `${AUDIO_BASE_PATH}audio4.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-4.png`], write_image: `${IMAGE_BASE_PATH}sketch4.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-5.png`, sound: `${AUDIO_BASE_PATH}audio5.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-5.png`], write_image: `${IMAGE_BASE_PATH}sketch5.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-6.png`, sound: `${AUDIO_BASE_PATH}audio6.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-5.png`, `${IMAGE_BASE_PATH}Hand-6.png`], write_image: `${IMAGE_BASE_PATH}sketch6.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-7.png`, sound: `${AUDIO_BASE_PATH}audio7.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-2.png`, `${IMAGE_BASE_PATH}7(2).png`], write_image: `${IMAGE_BASE_PATH}sketch7.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-8.png`, sound: `${AUDIO_BASE_PATH}audio8.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-5.png`, `${IMAGE_BASE_PATH}Hand-3.png`], write_image: `${IMAGE_BASE_PATH}sketch8.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-9.png`, sound: `${AUDIO_BASE_PATH}audio9.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-4.png`, `${IMAGE_BASE_PATH}Hand-10.png`], write_image: `${IMAGE_BASE_PATH}sketch9.png` },
+            { number: { image: `${IMAGE_BASE_PATH}Num-10.png`, sound: `${AUDIO_BASE_PATH}audio10.m4a` }, hands: [`${IMAGE_BASE_PATH}Hand-5.png`, `${IMAGE_BASE_PATH}Hand-10.png`], write_image: `${IMAGE_BASE_PATH}sketch10.png` }
+        ];
+    </script>     
+
+    <script src="{{ url_for('static', filename='M1-3-1-script.js') }}"></script>
+</body>
+</html>

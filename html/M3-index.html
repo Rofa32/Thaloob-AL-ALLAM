@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدث ثعلوب العلام</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M3-style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Adding chat history to the right -->
+        <div class="chat-history">
+            <h2>المحادثات السابقة</h2>
+            <div id="history">
+                <!-- User's messages will be added here as history -->
+            </div>
+        </div>
+        
+        <!-- The chat covers the rest of the screen -->
+        <div class="chat-box">
+            <div class="chat-header">
+                <h1>تحدث مع ثعلوب</h1>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <!-- Chat messages are appended here  -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="message-input" placeholder="اكتب رسالتك هنا...">
+                <!-- Send message button for written messages -->
+                <button onclick="sendMessage()" class="send-btn"></button>
+                <!-- Recording audio button -->
+                <button id='record-btn' class="voice-btn">
+                    <img src="{{ url_for('static', filename='images/mic.png') }}" alt="تسجيل">
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+    	const text2SpeechIconUrl = "{{ url_for('static', filename='images/Text2Speech.png') }}";
+ 	const micIconUrl = "{{ url_for('static', filename='images/mic.png') }}";
+    </script>
+    <script src="{{ url_for('static', filename='M3-script.js') }}"></script>
+</body>
+</html>

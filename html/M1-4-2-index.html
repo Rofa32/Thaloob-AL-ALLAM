@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة القراءة للأطفال</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-4-2-style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-content">
+            <div class="text-section">
+                <p id="text-to-read">السماء زرقاء، والشمس مشرقة.</p>
+            </div>
+            <div class="controls-section">
+                <button class="control-btn start-btn" onclick="startReading()">ابدأ القراءة</button>
+            </div>
+            <!-- Adding the required photos -->
+            <img src="{{ url_for('static', filename='images/thaloob-read.png') }}" alt="صورة ثعلوب" class="corner-image">
+        </div>
+    </div>
+
+    <div id="popup" class="popup hidden">
+        <p id="popupMessage"></p>
+        <button id="closePopupBtn" onclick="closePopup()">X</button>
+        <button onclick="nextText()" id="nextBtn">التالي</button>
+    </div>
+
+    <script>
+const texts = [
+    { text: "السماء زرقاء، والشمس مشرقة.", sound: "{{ url_for('static', filename='images/sky.mp3') }}" },
+    { text: "الطائر يغرد فوق الشجرة.", sound: "{{ url_for('static', filename='images/bird.mp3') }}" },
+    { text: "السيارة تسير بسرعة.", sound: "{{ url_for('static', filename='images/car.mp3') }}" },
+    ];
+    </script>
+    <script src="{{ url_for('static', filename='M1-4-2-script.js') }}"></script>
+</body>
+</html>

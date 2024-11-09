@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة تعليمية</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-4-style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-content">
+            <div class="image-section">
+                <img src="{{ url_for('static', filename='images/حبل.jpeg') }}"  alt="حبل" class="object-image">
+                <button class="sound-icon" onclick="playSound()">
+                    <img src="{{ url_for('static', filename='images/Text2Speech.png') }}" alt="استماع">
+                </button>
+            </div>
+            <div class="word-section">
+                <div class="word-blanks">_ _ _</div>
+            </div>
+            <div class="letters-section">
+                <button onclick="selectLetter('ح')">ح</button>
+                <button onclick="selectLetter('ث')">ث</button>
+                <button onclick="selectLetter('أ')">أ</button>
+                <button onclick="selectLetter('ش')">ش</button>
+                <button onclick="selectLetter('خ')">خ</button>
+                <button onclick="selectLetter('ل')">ل</button>
+                <button onclick="selectLetter('د')">د</button>
+                <button onclick="selectLetter('ب')">ب</button>
+            </div>
+            <div class="controls-section">
+                <button class="control-btn delete-btn" onclick="deleteLastLetter()">مسح</button>
+                <button class="control-btn reset-btn" onclick="resetGame()">إعادة</button>
+                <button class="control-btn back-btn" onclick="goBack()">رجوع</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup hidden">
+        <p id="popupMessage"></p>
+        <button onclick="nextPage()" id="nextBtn">التالي</button> <!-- زر "التالي" -->
+    </div>
+
+    <!-- Add audio element to load the audio file -->
+    <audio id="wordAudio" src="{{ url_for('static', filename='images/حبل.mp3') }}"></audio>
+    <script>
+    // Define the stages (word, image, sound, extra letters)
+     const stages = [
+    {
+        word: ['ح', 'ب', 'ل'],
+        image: "{{ url_for('static', filename='images/حبل.jpeg') }}",
+        sound: "{{ url_for('static', filename='images/حبل.mp3') }}",
+        alt: 'Rope',
+        extraLetters: ['ث', 'ش', 'أ', 'د', 'خ'] // Extra letters to fill 8 letters
+    },
+    {
+        word: ['ت', 'ل', 'ف', 'ا', 'ز'],
+        image: "{{ url_for('static', filename='images/تلفاز.jpeg') }}",
+        sound: "{{ url_for('static', filename='images/تلفاز.mp3') }}",
+        alt: 'Television',
+        extraLetters: ['خ', 'ط', 'ب'] // Extra letters to fill 8 letters
+    },
+    {
+        word: ['خ', 'ض', 'ر', 'و', 'ا', 'ت'],
+        image: "{{ url_for('static', filename='images/خضروات.jpeg') }}",  // Image for stage three
+        sound: "{{ url_for('static', filename='images/خضروات.mp3') }}",    // Sound for stage three
+        alt: 'Vegetables',
+        extraLetters: ['ث', 'ط'] // Extra letters to fill 8 letters
+    },
+    {
+        word: ['د', 'ل', 'ف', 'ي', 'ن'],
+        image: "{{ url_for('static', filename='images/دلفين.jpeg') }}",  // Image for stage four
+        sound: "{{ url_for('static', filename='images/دلفين.mp3') }}",    // Sound for stage four
+        alt: 'Dolphin',
+        extraLetters: ['ث', 'ط', 'و'] // Extra letters to fill 8 letters
+    },
+    {
+        word: ['ذ', 'ر', 'ا', 'ع'],
+        image: "{{ url_for('static', filename='images/ذراع.jpeg') }}",  // Image for stage five
+        sound: "{{ url_for('static', filename='images/ذراع.mp3') }}",    // Sound for stage five
+        alt: 'Arm',
+        extraLetters: ['ث', 'ط', 'و', 'غ'] // Extra letters to fill 8 letters
+    },
+    {
+        word: ['ش', 'م', 'ع', 'ة'],
+        image: "{{ url_for('static', filename='images/شمعة.jpeg') }}",  // Image for stage six
+        sound: "{{ url_for('static', filename='images/شمعة.mp3') }}",    // Sound for stage six
+        alt: 'Candle',
+        extraLetters: ['س', 'ط', 'غ', 'ن'] // Extra letters to fill 8 letters
+    },
+    {
+        word: ['ظ', 'ر', 'ف'],
+        image: "{{ url_for('static', filename='images/ظرف.jpeg') }}",  // Image for stage seven
+        sound: "{{ url_for('static', filename='images/ظرف.mp3') }}",    // Sound for stage seven
+        alt: 'Envelope',
+        extraLetters: ['ث', 'ض', 'و', 'ط', 'ن'] // Extra letters to fill 8 letters
+    },
+    {
+        word: ['ع', 'ص', 'ف', 'و', 'ر'],
+        image: "{{ url_for('static', filename='images/عصفور.jpeg') }}",  // Image for stage eight
+        sound: "{{ url_for('static', filename='images/عصفور.mp3') }}",    // Sound for stage eight
+        alt: 'Sparrow',
+        extraLetters: ['ث', 'ض', 'ق'] // Extra letters to fill 8 letters
+    },
+    {
+        word: ['م', 'ه', 'ن', 'د', 'س'],
+        image: "{{ url_for('static', filename='images/مهندس.jpeg') }}",  // Image for stage nine
+        sound: "{{ url_for('static', filename='images/مهندس.mp3') }}",    // Sound for stage nine
+        alt: 'Engineer',
+        extraLetters: ['ث', 'ض', 'و'] // Extra letters to fill 8 letters
+    }
+     ];
+     const nextPageUrl = "{{ url_for('fourth_two_game') }}";
+    </script>
+    <script src="{{ url_for('static', filename='M1-4-script.js') }}"></script>
+</body>
+</html>

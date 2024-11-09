@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة قصة الثعلب</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M2-style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='images/back.jpg') }}" alt="background" class="background">
+        <div class="overlay">
+
+            <!-- Top-right button -->
+            <button id="top-right-btn" class="top-right-btn" onclick="handleTopRightButtonClick()">تحدث مع ثعلوب</button>
+
+            <div class="bubble right">
+                <p id="story-text">مرحبًا يا صديقي! أنا ثعلوب الحكيم، هنا لأشاركك قصص الأنبياء الرائعة. كل ما عليك هو الضغط على زر تسجيل الصوت وإخباري بالقصة التي تحب أن أرويها لك</p>
+            </div>
+            <button id="record-btn">🎤 تسجيل الصوت</button>
+            <img src="{{ url_for('static', filename='images/thaloob2.png') }}" alt="Fox" class="fox-image" id="fox-image">
+        </div>
+    </div>
+    <script>
+        const still_fox = "{{ url_for('static', filename='images/thaloob2.png') }}";
+        const talking_fox = "{{ url_for('static', filename='images/fox_talk.gif') }}";
+        const go_chat =  "{{ url_for('chat') }}";
+    </script>
+    <script src="{{ url_for('static', filename='M2-script.js') }}"></script>
+</body>
+</html> 

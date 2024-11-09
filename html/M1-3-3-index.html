@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلم الألوان</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-3-3-style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="background">
+            <img id="background-image" src="{{ url_for('static', filename='images/back-colors.png') }}" alt="Forest Background">
+        </div>
+        <div class="frame">
+            <!-- Navigation arrows for color sets -->
+            <img id="left-arrow" src="{{ url_for('static', filename='images/left.png') }}" alt="Left Arrow" class="arrow" onclick="navigate('prev')">
+            <img id="right-arrow" src="{{ url_for('static', filename='images/right.png') }}" alt="Right Arrow" class="arrow" onclick="navigate('next')">
+
+            <!-- Color images -->
+            <div class="color-frame">
+                <img id="color1" alt="اللون" class="color-image">
+                <img id="color2" alt="اللون" class="color-image">
+                <img id="color3" alt="اللون" class="color-image">
+            </div>
+        </div>        
+    </div>
+
+    <script>
+        const IMAGE_BASE_PATH = "{{ url_for('static', filename='images/') }}";
+        const AUDIO_BASE_PATH = IMAGE_BASE_PATH;
+
+        const colorsData = [
+            { colorName: "أصفر", image: `${IMAGE_BASE_PATH}yellow.png`, sound: `${AUDIO_BASE_PATH}yellow.mp3` },
+            { colorName: "أخضر", image: `${IMAGE_BASE_PATH}green.png`, sound: `${AUDIO_BASE_PATH}green.mp3` },
+            { colorName: "برتقالي", image: `${IMAGE_BASE_PATH}orange.png`, sound: `${AUDIO_BASE_PATH}orange.mp3` },
+            { colorName: "أزرق", image: `${IMAGE_BASE_PATH}blue.png`, sound: `${AUDIO_BASE_PATH}blue.mp3` },
+            { colorName: "أسود", image: `${IMAGE_BASE_PATH}black.png`, sound: `${AUDIO_BASE_PATH}black.mp3` },
+            { colorName: "أحمر", image: `${IMAGE_BASE_PATH}red.png`, sound: `${AUDIO_BASE_PATH}red.mp3` }
+        ];
+        const go_game_color = "{{ url_for('game_colors') }}";
+    </script>
+
+    <script src="{{ url_for('static', filename='M1-3-3-script.js') }}"></script>
+</body>
+</html>

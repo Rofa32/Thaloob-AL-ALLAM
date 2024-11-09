@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Forest Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='M1-1-style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="background">
+            <img id="background-image" src="{{ url_for('static', filename='images/M1.png') }}" alt="Forest Background">
+        </div>
+        <div class="frame">
+            <img id="left-arrow" src="{{ url_for('static', filename='images/left.png') }}" alt="Left Arrow" class="arrow" onclick="navigate('next')">
+            <img id="right-arrow" src="{{ url_for('static', filename='images/right.png') }}" alt="Right Arrow" class="arrow" onclick="navigate('prev')">
+
+            <div class="content-row">
+                <div class="image-row" id="word-images"></div>
+                <img id="letter" alt="الحرف" class="letter-image">
+            </div>
+
+            <div class="interactive-buttons">
+                <img id="pen-logo" src="{{ url_for('static', filename='images/penlogo-removebg-preview.png') }}" alt="Pen Icon" class="icon">
+            </div>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>طريقة كتابة الحرف</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="audio-container"></div>
+
+    <!-- Define IMAGE_BASE_PATH and AUDIO_BASE_PATH for use in JavaScript -->
+    <script>
+        const IMAGE_BASE_PATH = "{{ url_for('static', filename='images/') }}";
+        const AUDIO_BASE_PATH = IMAGE_BASE_PATH;  // Assuming audio files are in the same images folder
+        
+        // Define lettersData directly in JavaScript with paths set by IMAGE_BASE_PATH and AUDIO_BASE_PATH
+        const lettersData = [
+        {
+        letter: { image: `${IMAGE_BASE_PATH}ا.png`, sound: `${AUDIO_BASE_PATH}ا.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}الوان.png`, sound: `${AUDIO_BASE_PATH}الوان.mp3` },
+            { image: `${IMAGE_BASE_PATH}اسماء.png`, sound: `${AUDIO_BASE_PATH}اسماء.mp3` },
+            { image: `${IMAGE_BASE_PATH}ارنب.png`, sound: `${AUDIO_BASE_PATH}ارنب.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ا-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ب.png`, sound: `${AUDIO_BASE_PATH}ب.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}باب.png`, sound: `${AUDIO_BASE_PATH}باب.mp3` },
+            { image: `${IMAGE_BASE_PATH}برتقال.png`, sound: `${AUDIO_BASE_PATH}برتقال.mp3` },
+            { image: `${IMAGE_BASE_PATH}بطة.png`, sound: `${AUDIO_BASE_PATH}بطة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ب-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ت.png`, sound: `${AUDIO_BASE_PATH}ت.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}تاج.png`, sound: `${AUDIO_BASE_PATH}تاج.mp3` },
+            { image: `${IMAGE_BASE_PATH}تفاح.png`, sound: `${AUDIO_BASE_PATH}تفاح.mp3` },
+            { image: `${IMAGE_BASE_PATH}تلفاز.png`, sound: `${AUDIO_BASE_PATH}تلفاز.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ت-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ث.png`, sound: `${AUDIO_BASE_PATH}ث.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}ثعلب.png`, sound: `${AUDIO_BASE_PATH}ثعلب.mp3` },
+            { image: `${IMAGE_BASE_PATH}ثعبان.png`, sound: `${AUDIO_BASE_PATH}ثعبان.mp3` },
+            { image: `${IMAGE_BASE_PATH}ثلج.png`, sound: `${AUDIO_BASE_PATH}ثلج.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ث-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ج.png`, sound: `${AUDIO_BASE_PATH}ج.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}جراد.png`, sound: `${AUDIO_BASE_PATH}جراد.mp3` },
+            { image: `${IMAGE_BASE_PATH}جبن.png`, sound: `${AUDIO_BASE_PATH}جبن.mp3` },
+            { image: `${IMAGE_BASE_PATH}جرس.png`, sound: `${AUDIO_BASE_PATH}جرس.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ج-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ح.png`, sound: `${AUDIO_BASE_PATH}ح.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}حصان.png`, sound: `${AUDIO_BASE_PATH}حصان.mp3` },
+            { image: `${IMAGE_BASE_PATH}حمار.png`, sound: `${AUDIO_BASE_PATH}حمار.mp3` },
+            { image: `${IMAGE_BASE_PATH}حبل.png`, sound: `${AUDIO_BASE_PATH}حبل.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ح-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}خ.png`, sound: `${AUDIO_BASE_PATH}خ.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}خروف.png`, sound: `${AUDIO_BASE_PATH}خروف.mp3` },
+            { image: `${IMAGE_BASE_PATH}خبز.png`, sound: `${AUDIO_BASE_PATH}خبز.mp3` },
+            { image: `${IMAGE_BASE_PATH}خضروات.png`, sound: `${AUDIO_BASE_PATH}خضروات.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}خ-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}د.png`, sound: `${AUDIO_BASE_PATH}د.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}دب.png`, sound: `${AUDIO_BASE_PATH}دب.mp3` },
+            { image: `${IMAGE_BASE_PATH}دلفين.png`, sound: `${AUDIO_BASE_PATH}دلفين.mp3` },
+            { image: `${IMAGE_BASE_PATH}ديك.png`, sound: `${AUDIO_BASE_PATH}ديك.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}د-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ذ.png`, sound: `${AUDIO_BASE_PATH}ذ.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}ذيب.png`, sound: `${AUDIO_BASE_PATH}ذيب.mp3` },
+            { image: `${IMAGE_BASE_PATH}ذرة.png`, sound: `${AUDIO_BASE_PATH}ذرة.mp3` },
+            { image: `${IMAGE_BASE_PATH}ذراع.png`, sound: `${AUDIO_BASE_PATH}ذراع.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ذ-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ر.png`, sound: `${AUDIO_BASE_PATH}ر.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}رمان.png`, sound: `${AUDIO_BASE_PATH}رمان.mp3` },
+            { image: `${IMAGE_BASE_PATH}رجل.png`, sound: `${AUDIO_BASE_PATH}رجل.mp3` },
+            { image: `${IMAGE_BASE_PATH}رياح.png`, sound: `${AUDIO_BASE_PATH}رياح.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ر-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ز.png`, sound: `${AUDIO_BASE_PATH}ز.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}زرافة.png`, sound: `${AUDIO_BASE_PATH}زرافة.mp3` },
+            { image: `${IMAGE_BASE_PATH}زيتون.png`, sound: `${AUDIO_BASE_PATH}زيتون.mp3` },
+            { image: `${IMAGE_BASE_PATH}زهرة.png`, sound: `${AUDIO_BASE_PATH}زهرة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ز-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}س.png`, sound: `${AUDIO_BASE_PATH}س.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}سكر.png`, sound: `${AUDIO_BASE_PATH}سكر.mp3` },
+            { image: `${IMAGE_BASE_PATH}سلطة.png`, sound: `${AUDIO_BASE_PATH}سلطة.mp3` },
+            { image: `${IMAGE_BASE_PATH}سمك.png`, sound: `${AUDIO_BASE_PATH}سمك.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}س-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ش.png`, sound: `${AUDIO_BASE_PATH}ش.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}شمس.png`, sound: `${AUDIO_BASE_PATH}شمس.mp3` },
+            { image: `${IMAGE_BASE_PATH}شجرة.png`, sound: `${AUDIO_BASE_PATH}شجرة.mp3` },
+            { image: `${IMAGE_BASE_PATH}شمعة.png`, sound: `${AUDIO_BASE_PATH}شمعة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ش-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ص.png`, sound: `${AUDIO_BASE_PATH}ص.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}صقر.png`, sound: `${AUDIO_BASE_PATH}صقر.mp3` },
+            { image: `${IMAGE_BASE_PATH}صديق.png`, sound: `${AUDIO_BASE_PATH}صديق.mp3` },
+            { image: `${IMAGE_BASE_PATH}صندوق.png`, sound: `${AUDIO_BASE_PATH}صندوق.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ص-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ض.png`, sound: `${AUDIO_BASE_PATH}ض.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}ضفدع.png`, sound: `${AUDIO_BASE_PATH}ضفدع.mp3` },
+            { image: `${IMAGE_BASE_PATH}ضوء.png`, sound: `${AUDIO_BASE_PATH}ضوء.mp3` },
+            { image: `${IMAGE_BASE_PATH}ضرس.png`, sound: `${AUDIO_BASE_PATH}ضرس.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ض-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ط.png`, sound: `${AUDIO_BASE_PATH}ط.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}طاير.png`, sound: `${AUDIO_BASE_PATH}طاير.mp3` },
+            { image: `${IMAGE_BASE_PATH}طاولة.png`, sound: `${AUDIO_BASE_PATH}طاولة.mp3` },
+            { image: `${IMAGE_BASE_PATH}طفل.png`, sound: `${AUDIO_BASE_PATH}طفل.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ط-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ظ.png`, sound: `${AUDIO_BASE_PATH}ظ.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}ظرف.png`, sound: `${AUDIO_BASE_PATH}ظرف.mp3` },
+            { image: `${IMAGE_BASE_PATH}ظل.png`, sound: `${AUDIO_BASE_PATH}ظل.mp3` },
+            { image: `${IMAGE_BASE_PATH}ظهر.png`, sound: `${AUDIO_BASE_PATH}ظهر.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ظ-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ع.png`, sound: `${AUDIO_BASE_PATH}ع.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}علم.png`, sound: `${AUDIO_BASE_PATH}علم.mp3` },
+            { image: `${IMAGE_BASE_PATH}عين.png`, sound: `${AUDIO_BASE_PATH}عين.mp3` },
+            { image: `${IMAGE_BASE_PATH}عصفور.png`, sound: `${AUDIO_BASE_PATH}عصفور.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ع-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}غ.png`, sound: `${AUDIO_BASE_PATH}غ.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}غزال.png`, sound: `${AUDIO_BASE_PATH}غزال.mp3` },
+            { image: `${IMAGE_BASE_PATH}غراب.png`, sound: `${AUDIO_BASE_PATH}غراب.mp3` },
+            { image: `${IMAGE_BASE_PATH}غيمة.png`, sound: `${AUDIO_BASE_PATH}غيمة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}غ-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ف.png`, sound: `${AUDIO_BASE_PATH}ف.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}فيل.png`, sound: `${AUDIO_BASE_PATH}فيل.mp3` },
+            { image: `${IMAGE_BASE_PATH}فراشة.png`, sound: `${AUDIO_BASE_PATH}فراشة.mp3` },
+            { image: `${IMAGE_BASE_PATH}فستان.png`, sound: `${AUDIO_BASE_PATH}فستان.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ف-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ق.png`, sound: `${AUDIO_BASE_PATH}ق.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}قطة.png`, sound: `${AUDIO_BASE_PATH}قطة.mp3` },
+            { image: `${IMAGE_BASE_PATH}قلم.png`, sound: `${AUDIO_BASE_PATH}قلم.mp3` },
+            { image: `${IMAGE_BASE_PATH}قهوة.png`, sound: `${AUDIO_BASE_PATH}قهوة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ق-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ك.png`, sound: `${AUDIO_BASE_PATH}ك.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}كتاب.png`, sound: `${AUDIO_BASE_PATH}كتاب.mp3` },
+            { image: `${IMAGE_BASE_PATH}كلب.png`, sound: `${AUDIO_BASE_PATH}كلب.mp3` },
+            { image: `${IMAGE_BASE_PATH}كرسي.png`, sound: `${AUDIO_BASE_PATH}كرسي.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ك-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ل.png`, sound: `${AUDIO_BASE_PATH}ل.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}ليمون.png`, sound: `${AUDIO_BASE_PATH}ليمون.mp3` },
+            { image: `${IMAGE_BASE_PATH}لبن.png`, sound: `${AUDIO_BASE_PATH}لبن.mp3` },
+            { image: `${IMAGE_BASE_PATH}لعبة.png`, sound: `${AUDIO_BASE_PATH}لعبة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ل-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}م.png`, sound: `${AUDIO_BASE_PATH}م.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}ماء.png`, sound: `${AUDIO_BASE_PATH}ماء.mp3` },
+            { image: `${IMAGE_BASE_PATH}مفتاح.png`, sound: `${AUDIO_BASE_PATH}مفتاح.mp3` },
+            { image: `${IMAGE_BASE_PATH}مهندس.png`, sound: `${AUDIO_BASE_PATH}مهندس.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}م-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ن.png`, sound: `${AUDIO_BASE_PATH}ن.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}نخلة.png`, sound: `${AUDIO_BASE_PATH}نخلة.mp3` },
+            { image: `${IMAGE_BASE_PATH}نملة.png`, sound: `${AUDIO_BASE_PATH}نملة.mp3` },
+            { image: `${IMAGE_BASE_PATH}نهر.png`, sound: `${AUDIO_BASE_PATH}نهر.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ن-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ه.png`, sound: `${AUDIO_BASE_PATH}ه.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}هاتف.png`, sound: `${AUDIO_BASE_PATH}هاتف.mp3` },
+            { image: `${IMAGE_BASE_PATH}هدية.png`, sound: `${AUDIO_BASE_PATH}هدية.mp3` },
+            { image: `${IMAGE_BASE_PATH}هرة.png`, sound: `${AUDIO_BASE_PATH}هرة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ه-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}و.png`, sound: `${AUDIO_BASE_PATH}و.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}وجه.png`, sound: `${AUDIO_BASE_PATH}وجه.mp3` },
+            { image: `${IMAGE_BASE_PATH}وردة.png`, sound: `${AUDIO_BASE_PATH}وردة.mp3` },
+            { image: `${IMAGE_BASE_PATH}وسادة.png`, sound: `${AUDIO_BASE_PATH}وسادة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}و-رسم.png` }
+    },
+    {
+        letter: { image: `${IMAGE_BASE_PATH}ي.png`, sound: `${AUDIO_BASE_PATH}ي.mp3` },
+        words: [
+            { image: `${IMAGE_BASE_PATH}يد.png`, sound: `${AUDIO_BASE_PATH}يد.mp3` },
+            { image: `${IMAGE_BASE_PATH}يقطين.png`, sound: `${AUDIO_BASE_PATH}يقطين.mp3` },
+            { image: `${IMAGE_BASE_PATH}يمامة.png`, sound: `${AUDIO_BASE_PATH}يمامة.mp3` }
+        ],
+        write_letter: { image: `${IMAGE_BASE_PATH}ي-رسم.png` }
+    }
+    ];
+    
+
+    </script>
+
+    <!-- Link to JavaScript file -->
+    <script src="{{ url_for('static', filename='M1-1-script.js') }}"></script>
+</body>
+</html>
