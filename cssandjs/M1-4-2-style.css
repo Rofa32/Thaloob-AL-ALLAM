@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    background-image: url('/static/images/back.jpg');
+    background-size: cover;
+    font-family: 'Comic Sans MS', sans-serif;
+    text-align: center;
+    direction: rtl;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    width: 60%;
+    max-width: 700px;
+    position: relative;
+}
+
+.text-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #424242;
+    position: relative;
+    overflow: hidden;
+}
+
+.sound-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #FFD54F;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(255, 235, 59, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sound-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px rgba(255, 235, 59, 0.8);
+}
+
+.sound-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.controls-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.control-btn {
+    font-size: 1.7rem;
+    padding: 15px 30px;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    background-color: #66BB6A;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFF9C4;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    border: 3px solid #F57C00;
+    z-index: 1000;
+    text-align: center;
+    width: 300px;
+}
+
+#nextBtn {
+    background-color: #FF7043;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 20px;
+}
+
+#nextBtn:hover {
+    background-color: #FF5722;
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none;
+}
+
+.corner-image {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 180px;
+    height: auto;
+    z-index: 1;
+}
+
+#closePopupBtn {
+    position: absolute; /* Position it absolutely within the popup */
+    top: 10px; /* Distance from the top of the popup */
+    right: 10px; /* Distance from the right of the popup */
+    background: transparent; /* Optional: make background transparent */
+    border: none; /* Optional: remove border */
+    font-size: 16px; /* Adjust the font size */
+    cursor: pointer; /* Make it look clickable */
+}

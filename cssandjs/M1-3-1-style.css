@@ -1,0 +1,152 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 70%;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    justify-content: center;
+}
+
+.arrow {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+
+#left-arrow {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#right-arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.interactive-buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.icon {
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    margin: 0 20px;
+}
+.content-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%; /* تقليص العرض لتجنب التداخل مع الأسهم */
+    margin-top: 10px;
+    padding: 0 50px; /* إضافة تباعد داخلي يمنع تداخل الصور مع الأسهم */
+}
+.hand-images-container {
+    display: flex;
+    justify-content: center; /* Center both hand images horizontally */
+    align-items: center; /* Align them vertically */
+    gap: 8px;
+    margin-right: 0px; /* تباعد بين صورة الرقم وصور اليدين */
+
+}
+
+.hand-image {
+    width: 200px; /* زيادة العرض */
+    height: 200px; /* زيادة الارتفاع */
+    cursor: pointer;
+    object-fit: contain;
+}
+
+
+
+.number-image {
+    width: 70vw; /* Responsive width based on viewport */
+    max-width: 280px; /* Maximum width limit */
+    height: auto;
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent the image from shrinking */
+    margin-left: 60px;
+
+}
+
+
+.modal {
+    display: none; /* مخفية افتراضياً */
+    position: fixed;
+    z-index: 1; /* اعلى طبقة للعرض */
+    left: 0;
+    top: 0;
+    width: 100%; /* العرض الكامل */
+    height: 100%; /* الارتفاع الكامل */
+    overflow: auto; /* تفعيل التمرير */
+    background-color: rgba(0, 0, 0, 0.7); /* خلفية داكنة */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 0.9% auto; /* توسيط النافذة */
+    padding: 20px;
+    border-radius: 10px; /* زوايا دائرية */
+    border: 1px solid #888;
+    width: 80%; /* عرض النافذة */
+    max-height: 90vh; /* الحد الأقصى للارتفاع */
+    overflow-y: auto; /* تفعيل التمرير الرأسي */
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}

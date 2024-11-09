@@ -1,0 +1,104 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('{{ url_for('static', filename='images/M1.png') }}') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    direction: rtl;
+}
+
+#game-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.speech-bubble {
+    font-size: 15px;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    position: relative;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: right;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    right: -30px;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-left-color: #fff;
+    border-right: none;
+    border-bottom: none;
+}
+
+.images, .numbers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.image-box, .number-box {
+    margin: 10px;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.image-box img, .number-box img {
+    max-width: 90px;
+    max-height: 90px;
+}
+
+.message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    font-size: 20px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.message-box.success {
+    color: green;
+    border-color: green;
+}
+
+.message-box.failure {
+    color: red;
+    border-color: red;
+}

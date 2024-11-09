@@ -1,0 +1,189 @@
+body {
+  font-family: 'Arial', sans-serif;
+  /* background: url('Back.webp') no-repeat center center fixed; */
+  background-size: cover;
+  color: #EEF0E5; /* لون النص */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  direction: rtl;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background: #163020; /* خلفية خضراء داكنة */
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.chat-history {
+  width: 20%;
+  background: #163020; /* تدرج أخضر */
+  padding: 15px;
+  overflow-y: auto;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+.chat-box {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  background: #304d30e6; /* خلفية خضراء */
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  background: #304D30; /* تدرج أخضر */
+  padding: 15px;
+  border-radius: 0;
+  justify-content: flex-start; /* محاذاة النص إلى البداية */
+}
+
+
+.chat-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.message.child {
+  background: #FEAE4F; /* لون فقاعة الرسالة الفاتح */
+  color: #163020; /* لون النص */
+  border-radius: 20px 20px 0px 20px;
+  justify-content: flex-end;
+  margin-left: auto;
+  font-size: 18px; /* حجم الخط */
+  font-weight: bold; /* جعل الخط أكثر غمقًا */
+
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #a8d5a5, #d5e8d4); /* تدرج لوني من الأخضر الفاتح */
+  opacity: 0.9;
+  border-radius: 0;
+}
+
+
+.message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  position: relative;
+  max-width: 70%;
+  border-radius: 20px;
+  background-color: #EEF0E5; /* خلفية فقاعة الرسالة الفاتحة */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 18px; /* حجم الخط */
+  font-weight: bold; /* جعل الخط أكثر غمقًا */
+
+}
+
+.message.thaloub {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #eaeaea; /* خلفية فقاعة الرسالة الثانية */
+  color: #163020; /* لون النص */
+  margin-right: auto;
+  border-radius: 20px 20px 20px 0;
+  padding: 10px;
+  max-width: 70%;
+  position: relative;
+}
+
+.message.thaloub .avatar {
+  width: 40px;
+  height: 40px;
+  background: url('/static/images/thaloob-icon.png') no-repeat center center;
+  background-size: cover;
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+.message.child .avatar {
+  display: none;
+}
+
+.message .text {
+  margin-right: 10px;
+  flex: 1;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.message .text-to-speech {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #304d30e6; /* خلفية حقل الكتابة الفاتحة */
+  gap: 10px;
+  border-radius: 0;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 15px;
+  border: none;
+  background-color: #B6C4B6; /* لون حقل الكتابة */
+  font-size: 18px; /* حجم الخط الجديد */
+  font-weight: bold; /* جعل الخط أكثر غمقًا */
+}
+
+/* تعديل زر الإرسال فقط */
+.send-btn {
+  background: #B6C4B6; /* لون الزر */
+  border: none;
+  padding: 15px; /* حجم padding أكبر لجعل الزر دائري */
+  border-radius: 50%; /* شكل دائري */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* تعديل العرض */
+  height: 40px; /* تعديل الارتفاع */
+}
+
+.send-btn::before {
+  content: '\2191'; /* رمز السهم إلى الأعلى */
+  font-size: 20px;
+  color: #163020; /* لون السهم */
+}
+
+.voice-btn {
+  background: rgba(182, 196, 182, 0.9); /* لون زر الصوت الفاتح */
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.voice-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.message.child, .message.thaloub {
+  max-width: 60%;
+  padding: 10px 20px;
+  width: auto;
+  white-space: pre-wrap;
+}
