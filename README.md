@@ -30,3 +30,9 @@ Expand the database for more diverse educational content.
 Allam Language Model: Tailored for Arabic language support and cultural context.
 AI Integration: Provides an interactive and responsive learning experience.
 User Interface: Child-friendly and easy to navigate.
+
+
+## 🚀 How to Run the Flask Application on Google Colab
+
+You can open and run the Colab notebook directly from the link below:
+https://drive.google.com/drive/folders/1OvgY4OpzPC6WsgtzezEJAFGJgD7M-gzE?usp=sharing
